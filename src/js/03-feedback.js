@@ -18,16 +18,21 @@ function onFormInput(evt) {
 
 function onFormSubmit(evt) {
     evt.preventDefault();
-console.log(JSON.parse(localStorage.getItem("feedback-form-state")));
+    console.log(JSON.parse(localStorage.getItem("feedback-form-state")));
+    localStorage.removeItem('feedback-form-state');
     evt.currentTarget.reset();
-    localStorage.removeItem("feedback-form-state");
+    
 }
 
 function addTextArea() {
     const saveText = JSON.parse(localStorage.getItem('feedback-form-state'));
 
-    if (saveText) {
+    if (saveText.email) {
         email.value = saveText.email;
+    };
+     
+    if (saveText.message) {
         message.value = saveText.message;
-    }
+    };
+    
 }
