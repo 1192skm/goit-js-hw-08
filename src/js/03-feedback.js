@@ -18,6 +18,11 @@ function onFormInput(evt) {
 
 function onFormSubmit(evt) {
     evt.preventDefault();
+    const { email, message } = form.elements;
+    if (!email.value || !message.value) {
+      alert('Заповніть усі поля!');
+      return;
+    }
     console.log(JSON.parse(localStorage.getItem("feedback-form-state")));
     localStorage.removeItem('feedback-form-state');
     evt.currentTarget.reset();
@@ -27,12 +32,9 @@ function onFormSubmit(evt) {
 function addTextArea() {
     const saveText = JSON.parse(localStorage.getItem('feedback-form-state'));
 
-    if (saveText.email) {
-        email.value = saveText.email;
-    };
-     
-    if (saveText.message) {
-        message.value = saveText.message;
-    };
+    if (saveText) {
+        email.value = saveText.email || '';
+        message.value = saveText.message || '';
+    }
     
 }
